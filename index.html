@@ -9,347 +9,627 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        /* Premium Header dengan Glassmorphism */
-        header.scrolled {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Advanced Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(60px) scale(0.95);
-            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: opacity, transform;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-100px) rotate(-5deg);
-            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .reveal-left.active {
-            opacity: 1;
-            transform: translateX(0) rotate(0deg);
-        }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(100px) rotate(5deg);
-            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .reveal-right.active {
-            opacity: 1;
-            transform: translateX(0) rotate(0deg);
-        }
-
-        /* Premium FAQ Animation */
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.7s ease-in-out;
-        }
-
-        /* Advanced Typing Effect */
-        .typing-cursor::after {
-            content: '|';
-            display: inline-block;
-            margin-left: 3px;
-            animation: blink 1s infinite;
-            color: #475569;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* Floating Animation untuk Hero */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(1deg); }
-            66% { transform: translateY(-10px) rotate(-1deg); }
-        }
-
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        /* Premium Card Hover Effects */
-        .feature-card {
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 40px 80px -20px rgba(14, 165, 233, 0.3);
-        }
-        
-        /* Mission Card Hover Effect (Perbaikan) */
-        .mission-card {
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .mission-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
-        }
-
-
-        /* Advanced Team Member Effects */
-        .team-member .team-img {
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .team-member:hover .team-img {
-             transform: scale(1.05);
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #0c4a6e, #0284c7);
-            border-radius: 10px;
-        }
-
-        /* Mobile Menu Premium Animation */
-        #mobile-menu-panel {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: -10px 0 50px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Particle Background */
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.1;
-        }
-
-        /* Premium Button Effects */
-        .premium-button {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0c4a6e, #0284c7);
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .premium-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .premium-button:hover::before {
-            left: 100%;
-        }
-
-        /* Magnetic Effect */
-        .magnetic {
-            transition: transform 0.2s ease-out;
-        }
-
-    </style>
-</head>
-<body class="bg-white text-sky-900">
-
-    <canvas id="particles-canvas"></canvas>
-
-    <div id="scroll-progress" class="fixed top-0 left-0 w-0 h-1 bg-gradient-to-r from-sky-600 to-sky-800 z-50 transition-all duration-300"></div>
-
-    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#beranda" class="flex items-center gap-3 magnetic">
-                <img src="img/logo.png" alt="SiRumah Logo" class="h-10 w-10">
-                <span class="text-2xl font-bold text-sky-900">SiRumah</span>
-            </a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#beranda" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">Beranda</a>
-                <a href="#tentang" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">Tentang Kami</a>
-                <a href="#visimisi" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">Visi & Misi</a>
-                <a href="#tim" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">Tim</a>
-                <a href="#faq" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">FAQ</a>
+            body {
+                font-family: 'DM Sans', sans-serif;
+            }
+    
+            /* Premium Header dengan Glassmorphism */
+            header.scrolled {
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+    
+            /* Advanced Reveal Animations */
+            .reveal {
+                opacity: 0;
+                transform: translateY(60px) scale(0.95);
+                transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                will-change: opacity, transform;
+            }
+    
+            .reveal.active {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+    
+            .reveal-left {
+                opacity: 0;
+                transform: translateX(-100px) rotate(-5deg);
+                transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+    
+            .reveal-left.active {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+    
+            .reveal-right {
+                opacity: 0;
+                transform: translateX(100px) rotate(5deg);
+                transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+    
+            .reveal-right.active {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+    
+            /* Premium FAQ Animation */
+            .faq-answer {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.7s ease-in-out;
+            }
+    
+            /* Advanced Typing Effect */
+            .typing-cursor::after {
+                content: '|';
+                display: inline-block;
+                margin-left: 3px;
+                animation: blink 1s infinite;
+                color: #475569;
+            }
+    
+            @keyframes blink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+    
+            /* Floating Animation untuk Hero */
+            @keyframes float {
+                0%, 100% { transform: translateY(0px) rotate(0deg); }
+                33% { transform: translateY(-20px) rotate(1deg); }
+                66% { transform: translateY(-10px) rotate(-1deg); }
+            }
+    
+            .float-animation {
+                animation: float 6s ease-in-out infinite;
+            }
+    
+            /* Premium Card Hover Effects */
+            .feature-card {
+                transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+    
+            .feature-card:hover {
+                transform: translateY(-15px) scale(1.05);
+                box-shadow: 0 40px 80px -20px rgba(14, 165, 233, 0.3);
+            }
+            
+            /* Mission Card Hover Effect (Perbaikan) */
+            .mission-card {
+                transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+    
+            .mission-card:hover {
+                transform: translateY(-10px) scale(1.03);
+                box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
+            }
+    
+            /* Advanced Team Member Effects */
+            .team-member .team-img {
+                transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+            
+            .team-member:hover .team-img {
+                 transform: scale(1.05);
+            }
+    
+            /* Scrollbar Styling */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+    
+            ::-webkit-scrollbar-track {
+                background: #f1f5f9;
+            }
+    
+            ::-webkit-scrollbar-thumb {
+                background: linear-gradient(180deg, #0c4a6e, #0284c7);
+                border-radius: 10px;
+            }
+    
+            /* Mobile Menu Premium Animation */
+            #mobile-menu-panel {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                box-shadow: -10px 0 50px rgba(0, 0, 0, 0.1);
+            }
+    
+            /* Particle Background */
+            #particles-canvas {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+                opacity: 0.1;
+            }
+    
+            /* Premium Button Effects */
+            .premium-button {
+                position: relative;
+                overflow: hidden;
+                background: linear-gradient(135deg, #0c4a6e, #0284c7);
+                transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+    
+            .premium-button::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.6s;
+            }
+    
+            .premium-button:hover::before {
+                left: 100%;
+            }
+    
+            /* Magnetic Effect */
+            .magnetic {
+                transition: transform 0.2s ease-out;
+            }
+    
+            /* ENHANCED RESPONSIVE DESIGN */
+            
+            /* Desktop First - Default Styles */
+            .hero-logo {
+                width: 9rem;
+                height: auto;
+            }
+    
+            .feature-icon {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+    
+            /* iPad/Tablet Responsive - 1024px and below */
+            @media (max-width: 1024px) {
+                /* Typography Adjustments */
+                .hero-title {
+                    font-size: 3rem !important;
+                    line-height: 1.1;
+                }
+    
+                .hero-subtitle {
+                    font-size: 1.75rem !important;
+                    line-height: 1.2;
+                }
+    
+                .section-title {
+                    font-size: 2.25rem !important;
+                    line-height: 1.2;
+                }
+    
+                .section-subtitle {
+                    font-size: 1.5rem !important;
+                }
+    
+                .card-title {
+                    font-size: 1.125rem !important;
+                }
+    
+                .card-text {
+                    font-size: 0.875rem !important;
+                }
+    
+                /* Logo and Images */
+                .hero-logo {
+                    width: 7rem;
+                }
+    
+                .feature-icon {
+                    width: 2rem;
+                    height: 2rem;
+                }
+    
+                .section-image {
+                    max-width: 80%;
+                    height: auto;
+                }
+    
+                /* Spacing Adjustments */
+                .section-padding {
+                    padding-top: 4rem !important;
+                    padding-bottom: 4rem !important;
+                }
+    
+                .hero-padding {
+                    padding-top: 5rem !important;
+                    padding-bottom: 5rem !important;
+                }
+    
+                /* Button Adjustments */
+                .premium-button {
+                    padding: 0.75rem 1.5rem !important;
+                    font-size: 0.875rem !important;
+                }
+    
+                /* Navigation */
+                .nav-brand {
+                    font-size: 1.5rem !important;
+                }
+    
+                .nav-logo {
+                    width: 2rem !important;
+                    height: 2rem !important;
+                }
+    
+                /* Cards Grid */
+                .feature-card, .mission-card {
+                    padding: 1.5rem !important;
+                    margin-bottom: 1rem;
+                }
+    
+                /* FAQ */
+                .faq-question {
+                    font-size: 1rem !important;
+                    padding: 1rem 0;
+                }
+            }
+    
+            /* Mobile Responsive - 768px and below */
+            @media (max-width: 768px) {
+                /* Typography Mobile */
+                .hero-title {
+                    font-size: 2.25rem !important;
+                    line-height: 1.1;
+                    margin-bottom: 1rem;
+                }
+    
+                .hero-subtitle {
+                    font-size: 1.25rem !important;
+                    line-height: 1.3;
+                    margin-bottom: 1rem;
+                }
+    
+                .section-title {
+                    font-size: 1.875rem !important;
+                    line-height: 1.2;
+                    margin-bottom: 1rem;
+                }
+    
+                .section-subtitle {
+                    font-size: 1.125rem !important;
+                }
+    
+                .card-title {
+                    font-size: 1rem !important;
+                }
+    
+                .card-text {
+                    font-size: 0.8rem !important;
+                    line-height: 1.4;
+                }
+    
+                .body-text {
+                    font-size: 0.875rem !important;
+                    line-height: 1.5;
+                }
+    
+                /* Logo and Images Mobile */
+                .hero-logo {
+                    width: 5rem;
+                    margin-bottom: 1.5rem;
+                }
+    
+                .feature-icon {
+                    width: 1.75rem;
+                    height: 1.75rem;
+                }
+    
+                .section-image {
+                    max-width: 90%;
+                    height: auto;
+                }
+    
+                /* Navigation Mobile */
+                .nav-brand {
+                    font-size: 1.25rem !important;
+                }
+    
+                .nav-logo {
+                    width: 1.75rem !important;
+                    height: 1.75rem !important;
+                }
+    
+                .nav-container {
+                    padding: 0.75rem 1rem !important;
+                }
+    
+                /* Mobile Menu */
+                #mobile-menu-panel {
+                    width: 85% !important;
+                    padding-top: 5rem !important;
+                }
+    
+                .mobile-link {
+                    font-size: 1rem !important;
+                    padding: 0.75rem 0 !important;
+                }
+    
+                /* Button Mobile */
+                .premium-button {
+                    padding: 0.625rem 1.25rem !important;
+                    font-size: 0.8rem !important;
+                }
+    
+                /* Spacing Mobile */
+                .section-padding {
+                    padding-top: 3rem !important;
+                    padding-bottom: 3rem !important;
+                }
+    
+                .hero-padding {
+                    padding-top: 4rem !important;
+                    padding-bottom: 4rem !important;
+                }
+    
+                /* Cards Mobile */
+                .feature-card, .mission-card {
+                    padding: 1.25rem !important;
+                    margin-bottom: 1rem;
+                }
+    
+                .feature-grid, .mission-grid {
+                    gap: 1rem !important;
+                }
+    
+                /* FAQ Mobile */
+                .faq-question {
+                    font-size: 0.9rem !important;
+                    padding: 0.75rem 0;
+                }
+    
+                .faq-answer p {
+                    font-size: 0.8rem !important;
+                    padding: 0.5rem !important;
+                }
+    
+                /* Footer Mobile */
+                .footer-grid {
+                    grid-template-columns: 1fr !important;
+                    gap: 2rem !important;
+                    text-align: center;
+                }
+    
+                .social-links {
+                    justify-content: center !important;
+                }
+    
+                .footer-nav {
+                    justify-content: center !important;
+                }
+    
+                /* Back to Top Mobile */
+                #back-to-top {
+                    width: 2.5rem !important;
+                    height: 2.5rem !important;
+                    bottom: 1rem !important;
+                    right: 1rem !important;
+                }
+    
+                /* Container Adjustments */
+                .container {
+                    padding-left: 1rem !important;
+                    padding-right: 1rem !important;
+                }
+    
+                /* Grid Adjustments Mobile */
+                .grid-mobile-1 {
+                    grid-template-columns: 1fr !important;
+                    gap: 2rem !important;
+                }
+    
+                .text-center-mobile {
+                    text-align: center !important;
+                }
+    
+                /* Image Responsive */
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+    
+                /* Hover Effects Disabled on Mobile */
+                .feature-card:hover,
+                .mission-card:hover {
+                    transform: none !important;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+                }
+    
+                /* Typing Effect Mobile */
+                #typing-effect {
+                    min-height: 2rem !important;
+                }
+            }
+    
+            /* Extra Small Mobile - 480px and below */
+            @media (max-width: 480px) {
+                .hero-title {
+                    font-size: 1.875rem !important;
+                }
+    
+                .hero-subtitle {
+                    font-size: 1rem !important;
+                }
+    
+                .section-title {
+                    font-size: 1.5rem !important;
+                }
+    
+                .hero-logo {
+                    width: 4rem;
+                }
+    
+                .feature-icon {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+    
+                .premium-button {
+                    padding: 0.5rem 1rem !important;
+                    font-size: 0.75rem !important;
+                }
+    
+                .card-text {
+                    font-size: 0.75rem !important;
+                }
+    
+                .feature-card, .mission-card {
+                    padding: 1rem !important;
+                }
+    
+                #mobile-menu-panel {
+                    width: 90% !important;
+                }
+            }
+    
+            /* Landscape Mobile Adjustments */
+            @media (max-width: 768px) and (orientation: landscape) {
+                .hero-padding {
+                    padding-top: 2rem !important;
+                    padding-bottom: 2rem !important;
+                }
+    
+                .section-padding {
+                    padding-top: 2rem !important;
+                    padding-bottom: 2rem !important;
+                }
+            }
+        </style>
+    </head>
+    <body class="bg-white text-sky-900">
+    
+        <canvas id="particles-canvas"></canvas>
+    
+        <div id="scroll-progress" class="fixed top-0 left-0 w-0 h-1 bg-gradient-to-r from-sky-600 to-sky-800 z-50 transition-all duration-300"></div>
+    
+        <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+            <nav class="nav-container container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#beranda" class="flex items-center gap-3 magnetic">
+                    <img src="img/logo.png" alt="SiRumah Logo" class="nav-logo h-10 w-10">
+                    <span class="nav-brand text-2xl font-bold text-sky-900">SiRumah</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#beranda" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">Beranda</a>
+                    <a href="#tentang" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">Tentang Kami</a>
+                    <a href="#visimisi" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">Visi & Misi</a>
+                    <a href="#tim" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">Tim</a>
+                    <a href="#faq" class="nav-link hover:text-sky-700 transition-all duration-300 magnetic">FAQ</a>
+                </div>
+                <a href="#" class="hidden md:block premium-button text-white px-6 py-2 rounded-md hover:shadow-2xl transform hover:scale-105 magnetic">Login</a>
+                <button id="mobile-menu-button" class="md:hidden z-50 magnetic">
+                    <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </nav>
+        </header>
+    
+        <div id="mobile-menu-panel" class="fixed top-0 right-0 h-full w-64 shadow-lg transform translate-x-full transition-transform duration-500 ease-out z-40 md:hidden">
+            <div class="pt-24 p-8 space-y-4">
+                <a href="#beranda" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">Beranda</a>
+                <a href="#tentang" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">Tentang Kami</a>
+                <a href="#visimisi" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">Visi & Misi</a>
+                <a href="#tim" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">Tim</a>
+                <a href="#faq" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">FAQ</a>
+                <a href="#" class="block premium-button text-white text-center mt-4 px-6 py-2 rounded-md">Login</a>
             </div>
-            <a href="#" class="hidden md:block premium-button text-white px-6 py-2 rounded-md hover:shadow-2xl transform hover:scale-105 magnetic">Login</a>
-            <button id="mobile-menu-button" class="md:hidden z-50 magnetic">
-                <svg class="w-6 h-6 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </nav>
-    </header>
-
-    <div id="mobile-menu-panel" class="fixed top-0 right-0 h-full w-64 shadow-lg transform translate-x-full transition-transform duration-500 ease-out z-40 md:hidden">
-        <div class="pt-24 p-8 space-y-4">
-            <a href="#beranda" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">Beranda</a>
-            <a href="#tentang" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">Tentang Kami</a>
-            <a href="#visimisi" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">Visi & Misi</a>
-            <a href="#tim" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">Tim</a>
-            <a href="#faq" class="mobile-link block text-lg hover:text-sky-700 transition-all duration-300">FAQ</a>
-            <a href="#" class="block premium-button text-white text-center mt-4 px-6 py-2 rounded-md">Login</a>
         </div>
-    </div>
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden transition-opacity duration-300"></div>
-
-    <main>
-        <section id="beranda" class="text-center min-h-screen flex flex-col justify-center items-center py-20 px-6">
-            <div class="container mx-auto">
-                <div class="flex justify-center reveal">
-                    <img src="img/logo.png" alt="Logo SiRumah" class="w-36 h-auto float-animation">
-                </div>
-                <h1 class="text-5xl md:text-6xl font-bold leading-tight mt-4 reveal" style="transition-delay: 0.2s;">Amanah Terjaga, Transparansi Nyata</h1>
-                <h2 id="typing-effect" class="text-3xl md:text-4xl font-bold text-slate-700 mt-4 reveal min-h-[3rem] md:min-h-[2.5rem]" style="transition-delay: 0.4s;"></h2>
-                <p class="mt-6 max-w-2xl mx-auto text-slate-500 reveal" style="transition-delay: 0.6s;">SiRumah adalah aplikasi digital untuk membantu panti asuhan dalam mencatat, mengelola, dan melaporkan keuangan sesuai prinsip syariah.</p>
-                <a href="#" class="mt-8 inline-block premium-button text-white px-8 py-3 rounded-md font-semibold hover:shadow-2xl transform hover:scale-105 reveal magnetic" style="transition-delay: 0.8s;">Lihat Pedoman Digital</a>
-            </div>
-        </section>
-
-        <section id="tentang" class="py-20 px-6 bg-slate-50 overflow-hidden">
-            <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-                <div class="reveal-left">
-                    <img src="img/data-analytics-for-report-with-calculator-and-pencil.png" alt="Tantangan Pelaporan Keuangan">
-                </div>
-                <div class="reveal-right">
-                    <h2 class="text-4xl font-bold">Tantangan Pelaporan Keuangan di Sektor Sosial</h2>
-                    <p class="mt-4 text-slate-500 leading-relaxed">Pengelolaan keuangan pada panti asuhan sering menghadapi tantangan dalam pelaporan. Standar yang ada seperti ISAK 35 dinilai kompleks, kurang adaptif untuk organisasi kecil, dan belum sepenuhnya berbasis prinsip syariah.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-20 px-6 overflow-hidden">
-            <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-                <div class="md:order-2 reveal-right">
-                    <img src="img/Device - Macbook Pro.png" alt="Dashboard Aplikasi SiRumah">
-                </div>
-                <div class="md:order-1 reveal-left">
-                    <h2 class="text-4xl font-bold">Solusi Kami: <br/>Laporan Falah Berbasis Syariah</h2>
-                    <p class="mt-4 text-slate-500 leading-relaxed">SiRumah hadir melalui konsep Semesta Sejahtera dan Sharia Enterprise Theory. Kami menekankan pertanggungjawaban ganda: horizontal kepada donatur dan masyarakat, serta vertikal kepada Allah SWT.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-20 px-6 bg-slate-50 text-center overflow-hidden">
-            <div class="container mx-auto">
-                <h2 class="text-4xl font-bold reveal">Mewujudkan Amanah Melalui Fitur Unggulan</h2>
-                <div class="mt-12 grid md:grid-cols-3 gap-8">
-                    <div class="feature-card bg-sky-900 text-white p-8 rounded-lg shadow-lg reveal">
-                        <div class="flex justify-center mb-4"><img src="img/digital-book.png" alt="Pencatatan Praktis" class="w-12 h-12"></div>
-                        <h3 class="text-xl font-bold">Pencatatan Praktis</h3>
-                        <p class="mt-2 text-sky-200">Menyediakan sistem pencatatan keuangan syariah yang sederhana dan praktis.</p>
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden transition-opacity duration-300"></div>
+    
+        <main>
+            <section id="beranda" class="text-center min-h-screen flex flex-col justify-center items-center hero-padding px-6">
+                <div class="container mx-auto">
+                    <div class="flex justify-center reveal">
+                        <img src="img/logo.png" alt="Logo SiRumah" class="hero-logo float-animation">
                     </div>
-                    <div class="feature-card bg-sky-900 text-white p-8 rounded-lg shadow-lg reveal" style="transition-delay: 0.2s;">
-                        <div class="flex justify-center mb-4"><img src="img/weight-care.png" alt="Transparansi & Akuntabilitas" class="w-12 h-12"></div>
-                        <h3 class="text-xl font-bold">Transparansi & Akuntabilitas</h3>
-                        <p class="mt-2 text-sky-200">Membantu panti asuhan menjaga transparansi dan akuntabilitas.</p>
+                    <h1 class="hero-title text-5xl md:text-6xl font-bold leading-tight mt-4 reveal" style="transition-delay: 0.2s;">Amanah Terjaga, Transparansi Nyata</h1>
+                    <h2 id="typing-effect" class="hero-subtitle text-3xl md:text-4xl font-bold text-slate-700 mt-4 reveal min-h-[3rem] md:min-h-[2.5rem]" style="transition-delay: 0.4s;"></h2>
+                    <p class="body-text mt-6 max-w-2xl mx-auto text-slate-500 reveal" style="transition-delay: 0.6s;">SiRumah adalah aplikasi digital untuk membantu panti asuhan dalam mencatat, mengelola, dan melaporkan keuangan sesuai prinsip syariah.</p>
+                    <a href="#" class="mt-8 inline-block premium-button text-white px-8 py-3 rounded-md font-semibold hover:shadow-2xl transform hover:scale-105 reveal magnetic" style="transition-delay: 0.8s;">Lihat Pedoman Digital</a>
+                </div>
+            </section>
+    
+            <section id="tentang" class="section-padding py-20 px-6 bg-sky-900 overflow-hidden">
+                <div class="container mx-auto grid grid-mobile-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="text-center-mobile reveal-left">
+                        <img src="img/data-analytics-for-report-with-calculator-and-pencil.png" alt="Tantangan Pelaporan Keuangan" class="section-image">
                     </div>
-                    <div class="feature-card bg-sky-900 text-white p-8 rounded-lg shadow-lg reveal" style="transition-delay: 0.4s;">
-                         <div class="flex justify-center mb-4"><img src="img/trust.png" alt="Kepercayaan Donatur" class="w-12 h-12"></div>
-                        <h3 class="text-xl font-bold">Kepercayaan Donatur</h3>
-                        <p class="mt-2 text-sky-200">Meningkatkan kepercayaan publik dan donatur melalui laporan yang mudah diakses.</p>
+                    <div class="text-center-mobile reveal-right">
+                        <h2 class="section-title text-4xl font-bold text-white">Tantangan Pelaporan Keuangan di Sektor Sosial</h2>
+                        <p class="body-text mt-4 text-white leading-relaxed">Pengelolaan keuangan pada panti asuhan sering menghadapi tantangan dalam pelaporan. Standar yang ada seperti ISAK 35 dinilai kompleks, kurang adaptif untuk organisasi kecil, dan belum sepenuhnya berbasis prinsip syariah.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="visimisi" class="py-20 px-6 text-center overflow-hidden">
-            <div class="container mx-auto">
-                <h2 class="text-4xl font-bold reveal">Visi</h2>
-                <div class="mt-4 max-w-4xl mx-auto text-xl text-slate-500 leading-relaxed reveal flex items-start gap-4">
-                    <img src="img/left-quotation.svg" alt="Left Quotation" class="w-8 h-8 mt-[-10px]">
-                    <p>Menjadi platform digital yang mendorong pengelolaan keuangan syariah yang transparan, amanah, dan inklusif bagi seluruh panti asuhan di Indonesia.</p>
-                    <img src="img/right-quotation.svg" alt="Right Quotation" class="w-8 h-8 mt-[20px]">
+            </section>
+    
+            <section class="section-padding py-20 px-6 overflow-hidden">
+                <div class="container mx-auto grid grid-mobile-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="md:order-2 text-center-mobile reveal-right">
+                        <img src="img/Device - Macbook Pro.png" alt="Dashboard Aplikasi SiRumah" class="section-image">
+                    </div>
+                    <div class="md:order-1 text-center-mobile reveal-left">
+                        <h2 class="section-title text-4xl font-bold">Solusi Kami: <br/>Laporan Falah Berbasis Syariah</h2>
+                        <p class="body-text mt-4 text-slate-500 leading-relaxed">SiRumah hadir melalui konsep Semesta Sejahtera dan Sharia Enterprise Theory. Kami menekankan pertanggungjawaban ganda: horizontal kepada donatur dan masyarakat, serta vertikal kepada Allah SWT.</p>
+                    </div>
                 </div>
-                <h2 class="text-4xl font-bold mt-20 reveal">Misi</h2>
-                <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="mission-card bg-slate-100 p-6 rounded-lg shadow reveal"><p class="text-slate-600">Memberikan pedoman digital untuk laporan keuangan panti asuhan.</p></div>
-                    <div class="mission-card bg-slate-100 p-6 rounded-lg shadow reveal" style="transition-delay: 0.2s;"><p class="text-slate-600">Mengintegrasikan nilai amanah, kejujuran, dan pertanggungjawaban syariah dalam pencatatan.</p></div>
-                    <div class="mission-card bg-slate-100 p-6 rounded-lg shadow reveal" style="transition-delay: 0.4s;"><p class="text-slate-600">Menyediakan sistem yang ramah pengguna dan bisa diakses siapa saja.</p></div>
-                    <div class="mission-card bg-slate-100 p-6 rounded-lg shadow reveal" style="transition-delay: 0.6s;"><p class="text-slate-600">Mendukung gerakan literasi dan inklusi keuangan syariah di sektor sosial.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="tim" class="py-20 px-6 bg-slate-50 text-center overflow-hidden">
-            <div class="container mx-auto">
-                <h2 class="text-4xl font-bold reveal">Together We Build Trust</h2>
-                <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-16 items-start justify-items-center">
-                    <div class="team-member flex flex-col items-center reveal">
-                        <div class="text-center mb-4 indent-[5.2em]">
-                            <h3 class="text-xl font-bold">John Doe</h3>
-                            <p class="text-slate-500">Ketua</p>
+            </section>
+    
+            <section class="section-padding py-20 px-6 bg-sky-900 text-center overflow-hidden">
+                <div class="container mx-auto">
+                    <h2 class="section-title text-3xl md:text-4xl font-bold reveal text-white">Mewujudkan Amanah Melalui Fitur Unggulan</h2>
+                    <div class="feature-grid mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="feature-card bg-white p-8 rounded-lg shadow-lg reveal transition-all duration-300">
+                            <img src="img/digital-book.png" alt="Pencatatan Praktis" class="feature-icon mx-auto mb-4 bg-deep-navy p-2 rounded-full">
+                            <h3 class="card-title text-xl font-bold text-deep-navy">Pencatatan Praktis</h3>
+                            <p class="card-text mt-2 text-slate-gray">Sistem pencatatan keuangan syariah yang sederhana dan praktis.</p>
                         </div>
-                        <img src="img/fotoframe.png" alt="John Doe" class="team-img">
-                    </div>
-                    <div class="team-member flex flex-col items-center md:mt-16 reveal" style="transition-delay: 0.1s;">
-                        <img src="img/fotoframe.png" alt="Jane Doe" class="team-img">
-                        <div class="text-center mt-4 indent-[-5.2em]">
-                            <h3 class="text-xl font-bold">Jane Doe</h3>
-                            <p class="text-slate-500">Dosen Pembimbing</p>
+                        <div class="feature-card bg-white p-8 rounded-lg shadow-lg reveal transition-all duration-300" style="transition-delay: 0.2s;">
+                            <img src="img/weight-care.png" alt="Transparansi & Akuntabilitas" class="feature-icon mx-auto mb-4 bg-deep-navy p-2 rounded-full">
+                            <h3 class="card-title text-xl font-bold text-deep-navy">Transparansi & Akuntabilitas</h3>
+                            <p class="card-text mt-2 text-slate-gray">Membantu panti asuhan menjaga transparansi dan akuntabilitas.</p>
+                        </div>
+                        <div class="feature-card bg-white p-8 rounded-lg shadow-lg reveal transition-all duration-300" style="transition-delay: 0.4s;">
+                            <img src="img/trust.png" alt="Kepercayaan Donatur" class="feature-icon mx-auto mb-4 bg-deep-navy p-2 rounded-full">
+                            <h3 class="card-title text-xl font-bold text-deep-navy">Kepercayaan Donatur</h3>
+                            <p class="card-text mt-2 text-slate-gray">Meningkatkan kepercayaan publik dan donatur melalui laporan.</p>
                         </div>
                     </div>
-                    <div class="team-member flex flex-col items-center reveal" style="transition-delay: 0.2s;">
-                        <div class="text-center mb-4 indent-[5.2em]">
-                            <h3 class="text-xl font-bold">Jane Doe</h3>
-                            <p class="text-slate-500">Anggota</p>
-                        </div>
-                        <img src="img/fotoframe.png" alt="Jane Doe" class="team-img">
+                </div>
+            </section>
+    
+            <section id="visimisi" class="section-padding py-20 px-6 text-center overflow-hidden">
+                <div class="container mx-auto">
+                    <h2 class="section-title text-4xl font-bold reveal">Visi</h2>
+                    <div class="mt-4 max-w-4xl mx-auto text-xl text-deep navy leading-relaxed reveal flex items-start gap-4">
+                        <img src="img/left-quotation.svg" alt="Left Quotation" class="w-8 h-8 mt-[-10px]">
+                        <p class="body-text">Menjadi platform digital yang mendorong pengelolaan keuangan syariah yang transparan, amanah, dan inklusif bagi seluruh panti asuhan di Indonesia.</p>
+                        <img src="img/right-quotation.svg" alt="Right Quotation" class="w-8 h-8 mt-[20px]">
                     </div>
-                    <div class="team-member flex flex-col items-center reveal">
-                        <div class="text-center mb-4 indent-[5.2em]">
-                            <h3 class="text-xl font-bold">Jane Doe</h3>
-                            <p class="text-slate-500">Anggota</p>
-                        </div>
-                        <img src="img/fotoframe.png" alt="Jane Doe" class="team-img">
-                    </div>
-                    <div class="team-member flex flex-col items-center md:mt-16 reveal" style="transition-delay: 0.1s;">
-                        <img src="img/fotoframe.png" alt="Jane Doe" class="team-img">
-                        <div class="text-center mt-4 indent-[-5.2em]">
-                            <h3 class="text-xl font-bold">Jane Doe</h3>
-                            <p class="text-slate-500">Anggota</p>
-                        </div>
-                    </div>
-                    <div class="team-member flex flex-col items-center reveal" style="transition-delay: 0.2s;">
-                        <div class="text-center mb-4 indent-[5.2em]">
-                            <h3 class="text-xl font-bold">Jane Doe</h3>
-                            <p class="text-slate-500">Anggota</p>
-                        </div>
-                        <img src="img/fotoframe.png" alt="Jane Doe" class="team-img">
+                    <h2 class="section-title text-4xl font-bold mt-20 reveal text-sky-900">Misi</h2>
+                    <div class="mission-grid mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="mission-card bg-slate-100 p-6 rounded-lg shadow reveal"><p class="card-text text-deep navy">Memberikan pedoman digital untuk laporan keuangan panti asuhan.</p></div>
+                        <div class="mission-card bg-slate-100 p-6 rounded-lg shadow reveal" style="transition-delay: 0.2s;"><p class="card-text text-deep navy">Mengintegrasikan nilai amanah, kejujuran, dan pertanggungjawaban syariah dalam pencatatan.</p></div>
+                        <div class="mission-card bg-slate-100 p-6 rounded-lg shadow reveal" style="transition-delay: 0.4s;"><p class="card-text text-deep navy">Menyediakan sistem yang ramah pengguna dan bisa diakses siapa saja.</p></div>
+                        <div class="mission-card bg-slate-100 p-6 rounded-lg shadow reveal" style="transition-delay: 0.6s;"><p class="card-text text-deep navy">Mendukung gerakan literasi dan inklusi keuangan syariah di sektor sosial.</p></div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+    
+            <section id="galeri" class="section-padding py-20 px-6 bg-sky-900 text-center overflow-hidden">
+                <h2 class="section-title text-4xl font-bold reveal text-white">Together We Build Trust</h2>
+            </section>
 
         <section id="faq" class="py-20 px-6">
             <div class="container mx-auto max-w-3xl">
@@ -422,10 +702,10 @@
                     <div class="flex items-center gap-3"><img src="img/logo.png" alt="SiRumah Logo" class="h-10 w-10"><span class="text-2xl font-bold">SiRumah</span></div>
                     <p class="mt-4 text-sky-200 text-m">Amanah Terjaga, Transparansi Nyata.</p>
                     <div class="mt-6 flex space-x-4">
-                        <a href="#" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/fb.png" alt="Facebook Icon"></a>
-                        <a href="#" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/ig.png" alt="Instagram Icon"></a>
-                        <a href="#" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/yt.png" alt="Youtube Icon"></a>
-                        <a href="#" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/x.png" alt="X Icon"></a>
+                        <a href="https://www.facebook.com/share/1EySQN8KKs/?mibextid=wwXIfr" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/fb.png" alt="Facebook Icon"></a>
+                        <a href="https://www.instagram.com/sirumahfalah?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/ig.png" alt="Instagram Icon"></a>
+                        <a href="https://www.youtube.com/@PKMRSHSiRumahFalah" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/yt.png" alt="Youtube Icon"></a>
+                        <a href="https://x.com/sirumahfalah?s=21" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/x.png" alt="X Icon"></a>
                     </div>
                 </div>
                 <div class="md:col-span-2 mt-8 md:mt-0 flex md:justify-end reveal" style="transition-delay: 0.2s;">
@@ -448,6 +728,19 @@
     </button>
 
     <script>
+         tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-navy': '#1d3c70',
+                        'soft-blue': '#c7cddd',
+                        'slate-gray': '#6f6f91',
+                        'muted-stone': '#888388',
+                    }
+                }
+            }
+        }
+    
     class EnhancedUI {
         constructor() {
             this.init();
@@ -636,6 +929,7 @@
             const teamMembers = document.querySelectorAll('.team-member');
             teamMembers.forEach(member => {
                 const img = member.querySelector('.team-img');
+                if (!img) return;
                 member.addEventListener('mousemove', (e) => {
                     const { left, top, width, height } = member.getBoundingClientRect();
                     const x = e.clientX - left;
@@ -663,7 +957,6 @@
 
             const typeWriter = () => {
                 const fullText = texts[currentTextIndex];
-                let currentText = typingElement.textContent;
                 
                 typingElement.classList.add('typing-cursor');
 
@@ -691,8 +984,10 @@
             setTimeout(typeWriter, 1500);
         }
 
-        // Magnetic Effect for Interactive Elements
+        // Magnetic Effect for Interactive Elements (disabled on mobile for performance)
         setupMagneticEffect() {
+            if (window.innerWidth <= 768) return; // Disable on mobile
+            
             const magneticElements = document.querySelectorAll('.magnetic');
             magneticElements.forEach(element => {
                 element.addEventListener('mousemove', (e) => {
@@ -716,8 +1011,9 @@
                     const targetId = link.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
+                        const headerHeight = window.innerWidth <= 768 ? 60 : 80;
                         window.scrollTo({
-                            top: targetElement.offsetTop - 80, // Adjust offset for header
+                            top: targetElement.offsetTop - headerHeight,
                             behavior: 'smooth'
                         });
                     }
