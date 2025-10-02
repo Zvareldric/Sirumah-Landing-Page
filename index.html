@@ -647,6 +647,35 @@
     
             <section id="galeri" class="section-padding py-20 px-6 bg-sky-900 text-center overflow-hidden">
                 <h2 class="section-title text-4xl font-bold reveal text-white">Together We Build Trust</h2>
+                <div class="carousel-container relative mt-12">
+                    <!-- Carousel Wrapper -->
+                    <div class="carousel-wrapper flex transition-transform duration-700 ease-in-out" style="transform: translateX(0);">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide min-w-full flex justify-center items-center">
+                            <img src="img/trust-slide-1.jpg" alt="Trust Slide 1" class="rounded-lg shadow-lg">
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide min-w-full flex justify-center items-center">
+                            <img src="img/trust-slide-2.jpg" alt="Trust Slide 2" class="rounded-lg shadow-lg">
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide min-w-full flex justify-center items-center">
+                            <img src="img/trust-slide-3.jpg" alt="Trust Slide 3" class="rounded-lg shadow-lg">
+                        </div>
+                    </div>
+            
+                    <!-- Navigation Buttons -->
+                    <button id="prev-slide" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white text-sky-900 p-2 rounded-full shadow-lg hover:bg-sky-100 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button id="next-slide" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white text-sky-900 p-2 rounded-full shadow-lg hover:bg-sky-100 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
             </section>
 
         <section id="faq" class="py-20 px-6">
@@ -1076,9 +1105,48 @@
         }
     }
 
-    // Initialize the premium website when DOM is loaded
+    // Initialize website when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
         new EnhancedUI();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const carouselWrapper = document.querySelector('.carousel-wrapper');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevButton = document.getElementById('prev-slide');
+            const nextButton = document.getElementById('next-slide');
+            let currentIndex = 0;
+    
+            const updateCarousel = () => {
+                const offset = -currentIndex * 100;
+                carouselWrapper.style.transform = `translateX(${offset}%)`;
+            };
+    
+            const showNextSlide = () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateCarousel();
+            };
+    
+            const showPrevSlide = () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateCarousel();
+            };
+    
+            // Auto-slide every 5 seconds
+            let autoSlide = setInterval(showNextSlide, 5000);
+    
+            // Manual navigation
+            nextButton.addEventListener('click', () => {
+                clearInterval(autoSlide);
+                showNextSlide();
+                autoSlide = setInterval(showNextSlide, 5000);
+            });
+    
+            prevButton.addEventListener('click', () => {
+                clearInterval(autoSlide);
+                showPrevSlide();
+                autoSlide = setInterval(showNextSlide, 5000);
+            });
+        });
     });
     </script>
 </body>
