@@ -291,12 +291,13 @@
 
 .infinite-nav-btn:hover {
     background: white;
-    transform: scale(1.1); /* Efek bergerak vertikal dihapus */
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05); /* Efek membesar lebih halus */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .infinite-nav-btn:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: scale(0.95); /* Efek 'ditekan' yang instan */
+    background: #f1f5f9; /* Warna sedikit berubah saat ditekan */
 }
 
 /* Dots Indicator */
@@ -341,6 +342,54 @@
 .infinite-dot:hover {
     background: rgba(255, 255, 255, 0.7);
     transform: scale(1.2);
+}
+
+.footer-title {
+    font-size: 1.125rem; /* 18px */
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+.footer-link-item {
+    color: #a5f3fc; /* cyan-200 */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.25rem 0;
+}
+
+.footer-link-item:hover {
+    color: white;
+    transform: translateX(4px);
+}
+
+.footer-social-icon {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.footer-social-icon:hover {
+    transform: translateY(-4px);
+}
+
+.footer-back-to-top {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border: 1px solid #7dd3fc; /* light-blue-300 */
+    border-radius: 9999px;
+    color: #e0f2fe; /* light-blue-100 */
+    font-size: 0.75rem; /* 12px */
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-back-to-top:hover {
+    background-color: #0ea5e9; /* sky-500 */
+    color: white;
+    border-color: #0ea5e9;
 }
 
 /* Tablet Responsive */
@@ -429,6 +478,8 @@
         width: 10px;
         height: 10px;
     }
+    
+    
 }
 
 @media (max-width: 480px) {
@@ -677,6 +728,9 @@
                 .footer-nav {
                     justify-content: center !important;
                 }
+                .footer {
+                    display: block !important; /* Memastikan footer tetap terlihat */
+                }
     
                 /* Back to Top Mobile */
                 #back-to-top {
@@ -857,17 +911,17 @@
                 <div class="container mx-auto">
                     <h2 class="section-title text-3xl md:text-4xl font-bold reveal text-white">Mewujudkan Amanah Melalui Fitur Unggulan</h2>
                     <div class="feature-grid mt-12 flex flex-wrap justify-center gap-8">
-                        <div class="feature-card bg-white p-8 rounded-lg shadow-lg reveal transition-all duration-300">
+                        <div class="feature-card bg-white p-8 rounded-lg shadow-lg reveal transition-all duration-300 w-full sm:w-[45%] lg:w-[30%]">
                             <img src="img/digital-book.png" alt="Pencatatan Praktis" class="feature-icon mx-auto mb-4 bg-deep-navy p-2 rounded-full">
                             <h3 class="card-title text-xl font-bold text-deep-navy">Pencatatan Praktis</h3>
                             <p class="card-text mt-2 text-slate-gray">Sistem pencatatan keuangan syariah yang sederhana dan praktis.</p>
                         </div>
-                        <div class="feature-card bg-white p-8 rounded-lg shadow-lg reveal transition-all duration-300" style="transition-delay: 0.2s;">
+                        <div class="feature-card bg-white p-8 rounded-lg shadow-lg reveal transition-all duration-300 w-full sm:w-[45%] lg:w-[calc((100%-4rem)/3)]" style="transition-delay: 0.2s;">
                             <img src="img/weight-care.png" alt="Transparansi & Akuntabilitas" class="feature-icon mx-auto mb-4 bg-deep-navy p-2 rounded-full">
                             <h3 class="card-title text-xl font-bold text-deep-navy">Transparansi & Akuntabilitas</h3>
                             <p class="card-text mt-2 text-slate-gray">Membantu panti asuhan menjaga transparansi dan akuntabilitas.</p>
                         </div>
-                        <div class="feature-card bg-white p-8 rounded-lg shadow-lg reveal transition-all duration-300" style="transition-delay: 0.4s;">
+                        <div class="feature-card bg-white p-8 rounded-lg shadow-lg reveal transition-all duration-300 w-full sm:w-[45%] lg:w-[calc((100%-4rem)/3)]" style="transition-delay: 0.4s;">
                             <img src="img/trust.png" alt="Kepercayaan Donatur" class="feature-icon mx-auto mb-4 bg-deep-navy p-2 rounded-full">
                             <h3 class="card-title text-xl font-bold text-deep-navy">Kepercayaan Donatur</h3>
                             <p class="card-text mt-2 text-slate-gray">Meningkatkan kepercayaan publik dan donatur melalui laporan.</p>
@@ -1058,37 +1112,59 @@
                 </div>
             </section>
         </main>
-
-        <footer class="bg-sky-900 text-white">
-            <div class="container mx-auto px-6 py-12">
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="reveal">
-                        <div class="flex items-center gap-3"><img src="img/logo.png" alt="SiRumah Logo" class="h-10 w-10"><span class="text-2xl font-bold">SiRumah</span></div>
-                        <p class="mt-4 text-sky-200 text-m">Amanah Terjaga, Transparansi Nyata.</p>
-                        <div class="mt-6 flex space-x-4">
-                            <a href="https://www.facebook.com/share/1EySQN8KKs/?mibextid=wwXIfr" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/fb.png" alt="Facebook Icon"></a>
-                            <a href="https://www.instagram.com/sirumahfalah?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/ig.png" alt="Instagram Icon"></a>
-                            <a href="https://www.youtube.com/@PKMRSHSiRumahFalah" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/yt.png" alt="Youtube Icon"></a>
-                            <a href="https://x.com/sirumahfalah?s=21" class="hover:opacity-80 transition-all duration-300 transform hover:scale-110 magnetic"><img src="img/x.png" alt="X Icon"></a>
+        <footer class="bg-sky-900 text-white pt-16 pb-8 px-6">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3">
+                            <img src="img/logo.png" alt="SiRumah Logo" class="h-10 w-10">
+                            <span class="text-2xl font-bold">SiRumah</span>
                         </div>
+                        <p class="text-sky-200 leading-relaxed">
+                            Amanah Terjaga, Transparansi Nyata.
+                        </p>
                     </div>
-                    <div class="md:col-span-2 mt-8 md:mt-0 flex md:justify-end reveal" style="transition-delay: 0.2s;">
-                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-8">
-                            <ul class="space-y-2 text-sky-200 text-center"><li><a href="#beranda" class="hover:text-white transition-colors duration-300 magnetic">Beranda</a></li></ul>
-                            <ul class="space-y-2 text-sky-200 text-center"><li><a href="#tentang" class="hover:text-white transition-colors duration-300 magnetic">Tentang Kami</a></li></ul>
-                            <ul class="space-y-2 text-sky-200 text-right"><li><a href="#visimisi" class="hover:text-white transition-colors duration-300 magnetic">Visi & Misi</a></li></ul>
-                            <ul class="space-y-2 text-sky-200 text-center"><li><a href="#tim" class="hover:text-white transition-colors duration-300 magnetic">Tim</a></li></ul>
-                            <ul class="space-y-2 text-sky-200 text-left"><li><a href="#faq" class="hover:text-white transition-colors duration-300 magnetic">FAQ</a></li></ul>
+        
+                    <div class="md:mx-auto">
+                        <h3 class="footer-title">Peta Situs</h3>
+                        <nav class="mt-4 flex flex-col items-start gap-2">
+                            <a href="#beranda" class="footer-link-item">Beranda</a>
+                            <a href="#tentang" class="footer-link-item">Tentang Kami</a>
+                            <a href="#visimisi" class="footer-link-item">Visi & Misi</a>
+                            <a href="#tim" class="footer-link-item">Tim</a>
+                            <a href="#faq" class="footer-link-item">FAQ</a>
+                        </nav>
+                    </div>
+        
+                    <div class="md:mx-auto">
+                        <h3 class="footer-title">Legalitas</h3>
+                        <nav class="mt-4 flex flex-col items-start gap-2">
+                            <a href="#" class="footer-link-item">Kebijakan Privasi</a>
+                            <a href="#" class="footer-link-item">Ketentuan Layanan</a>
+                        </nav>
+                    </div>
+                    <div>
+                        <h3 class="footer-title">Ikuti Kami</h3>
+                        <div class="flex space-x-4 mt-4">
+                            <a href="https://x.com/sirumahfalah?s=21" class="footer-social-icon"><img src="img/x.png" alt="X Icon"></a>
+                            <a href="https://www.youtube.com/@PKMRSHSiRumahFalah" class="footer-social-icon"><img src="img/yt.png" alt="Youtube Icon"></a>
+                            <a href="https://www.instagram.com/sirumahfalah?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="footer-social-icon"><img src="img/ig.png" alt="Instagram Icon"></a>
+                            <a href="https://www.facebook.com/share/1EySQN8KKs/?mibextid=wwXIfr" class="footer-social-icon"><img src="img/fb.png" alt="Facebook Icon"></a>
                         </div>
                     </div>
                 </div>
+        
+                <div class="mt-16 pt-6 border-t border-sky-800 text-center text-sky-300 text-sm">
+                    <p>Hak Cipta &copy; 2025 SiRumah. Semua Hak Dilindungi.</p>
+                </div>
             </div>
-            <div class="bg-sky-900 h-12"></div> 
         </footer>
 
-        <button id="back-to-top" class="fixed bottom-8 right-8 bg-sky-900 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 invisible">
+
+        <button id="back-to-top" class="fixed bottom-8 right-8 bg-sky-700 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 invisible">
             <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
             </svg>
         </button>
 
