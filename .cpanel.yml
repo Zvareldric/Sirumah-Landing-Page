@@ -3,4 +3,4 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/sirumahf/public_html/
     - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp -R images $DEPLOYPATH
+    - /bin/cp -R img $DEPLOYPATH
