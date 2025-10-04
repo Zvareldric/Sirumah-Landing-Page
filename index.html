@@ -291,7 +291,7 @@
 
 .infinite-nav-btn:hover {
     background: white;
-    transform: translateY(-50%) scale(1.1);
+    transform: scale(1.1); /* Efek bergerak vertikal dihapus */
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
 }
 
@@ -310,10 +310,16 @@
 
 .infinite-controls {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Membuat item tersusun ke bawah */
     align-items: center;
-    gap: 1.5rem; /* Jarak antara tombol dan titik */
-    margin-top: 2rem;
+    gap: 1.5rem; /* Jarak antara dots dan tombol */
+    margin-top: 2.5rem;
+}
+
+.infinite-nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Jarak antara tombol kiri dan kanan */
 }
 
 .infinite-dot {
@@ -891,7 +897,7 @@
                 <div class="container mx-auto text-center">
                     <h2 class="section-title text-4xl text-white font-bold reveal">Galeri Kegiatan Tim</h2>
                     <p class="body-text mt-4 max-w-2xl mx-auto text-white reveal" style="transition-delay: 0.2s;">
-                        Dokumentasi perjalanan tim kami dalam mengembangkan SiRumah dan berinteraksi dengan panti asuhan.
+                        Dokumentasi perjalanan tim kami dalam mengembangkan SiRumah dan berinteraksi dengan Panti Asuhan.
                     </p>
                     
                     <div class="infinite-carousel-container reveal" style="transition-delay: 0.4s;">
@@ -902,8 +908,8 @@
                                         <img src="img/1a.jpeg" alt="Kunjungan Pertama">
                                     </div>
                                     <div class="slide-info">
-                                        <h3>Kunjungan Pertama</h3>
-                                        <p>Pertemuan awal dengan pengurus panti untuk memahami kebutuhan mereka.</p>
+                                        <h3>Panti Asuhan KH. Mas Mansyur Kota Malang</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                                     </div>
                                 </div>
                             </div>
@@ -914,8 +920,8 @@
                                         <img src="img/1b.jpeg" alt="Workshop Pelatihan">
                                     </div>
                                     <div class="slide-info">
-                                        <h3>Workshop Pelatihan</h3>
-                                        <p>Memberikan pelatihan penggunaan aplikasi kepada admin panti.</p>
+                                        <h3>Panti Asuhan KH. Mas Mansyur Kota Malang</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                                     </div>
                                 </div>
                             </div>
@@ -926,8 +932,8 @@
                                         <img src="img/2a.jpeg" alt="Diskusi Tim">
                                     </div>
                                     <div class="slide-info">
-                                        <h3>Diskusi Tim</h3>
-                                        <p>Evaluasi dan penyempurnaan fitur bersama tim developer.</p>
+                                        <h3>LKSA Taqwa Al-Qolbi</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                                     </div>
                                 </div>
                             </div>
@@ -938,8 +944,8 @@
                                         <img src="img/2b.jpeg" alt="Sosialisasi Program">
                                     </div>
                                     <div class="slide-info">
-                                        <h3>Sosialisasi Program</h3>
-                                        <p>Memperkenalkan SiRumah kepada komunitas panti asuhan.</p>
+                                        <h3>LKSA Taqwa Al-Qolbi</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                                     </div>
                                 </div>
                             </div>
@@ -950,8 +956,8 @@
                                         <img src="img/3a.jpeg" alt="Testing Aplikasi">
                                     </div>
                                     <div class="slide-info">
-                                        <h3>Testing Aplikasi</h3>
-                                        <p>Pengujian langsung di lapangan bersama pengguna.</p>
+                                        <h3>Panti Asuhan Ar-Rohmah Blitar</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                                     </div>
                                 </div>
                             </div>
@@ -962,25 +968,27 @@
                                         <img src="img/3b.jpeg" alt="Pencapaian Bersama">
                                     </div>
                                     <div class="slide-info">
-                                        <h3>Pencapaian Bersama</h3>
-                                        <p>Perayaan launching resmi aplikasi SiRumah.</p>
+                                        <h3>Panti Asuhan Ar-Rohmah Blitar</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="infinite-controls">
-                            <button class="infinite-nav-btn prev-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
                             <div class="infinite-dots"></div>
-                            <button class="infinite-nav-btn next-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
+                            <div class="infinite-nav-buttons">
+                                <button class="infinite-nav-btn prev-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <button class="infinite-nav-btn next-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                          </div>
                 </div>
